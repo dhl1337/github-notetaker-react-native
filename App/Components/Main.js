@@ -23,6 +23,12 @@ class Main extends Component {
             username: event.nativeEvent.text
         })
     }
+    handleSubmit(event) {
+        this.setState({
+            isLoading: true
+        });
+        console.log('SUBMIT', this.state.username);
+    }
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -31,6 +37,12 @@ class Main extends Component {
                     style={styles.searchInput}
                     value={this.state.username}
                     onChange={this.handleChange.bind(this)} />
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={this.handleSubmit.bind(this)}
+                    underlayColor="white" >
+                    <Text style={styles.buttonText}> SEARCH </Text>
+                </TouchableHighlight>
             </View>
         )
     }
