@@ -8,33 +8,38 @@ import {
 } from 'react-native';
 import Badge from './Badge';
 import Separator from './helpers/Separator';
+import Web_View from './helpers/WebView';
 
 class Repositories extends Component {
     openPage(url) {
-        console.log(url);
+        this.props.navigator.push({
+            component:  Web_View,
+            title: 'Web View',
+            passProps: {url}
+        })
     }
-    render() {
+    render(){
         const repos = this.props.repos;
         const list = repos.map((item, index) => {
-            const desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View></View>
+            const desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />;
             return (
                 <View key={index}>
                     <View style={styles.rowContainer}>
                         <TouchableHighlight
                             onPress={this.openPage.bind(this, repos[index].html_url)}
                             underlayColor='transparent'>
-                            <Text style={styles.name}> {repos[index].name} </Text>
+                            <Text style={styles.name}>{repos[index].name}</Text>
                         </TouchableHighlight>
-                        <Text style={styles.stars}> Stars: {repos[index].stargazers_count}</Text>
+                        <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
                         {desc}
                     </View>
-                    <Separator />
+
                 </View>
             )
         });
         return (
             <ScrollView style={styles.container}>
-                <Badge userInfo={this.props.userInfo}/>
+                <Badge userInfo={this.props.userInfo} />
                 {list}
             </ScrollView>
         )

@@ -6,9 +6,9 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
-import api from '../Utils/api';
 import Profile from './Profile';
 import Repositories from './Repositories';
+import api from '../Utils/api';
 
 class Dashboard extends Component {
     makeBackground(btn) {
