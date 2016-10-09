@@ -53,10 +53,15 @@ class Dashboard extends Component {
     }
     goToNotes() {
         api.getNotes(this.props.userInfo.login)
-            .then(res => {
-                res = res || {};
+            .then(jsonRes => {
+                jsonRes = jsonRes || {};
                 this.props.navigator.push({
-                    compo
+                    component: Notes,
+                    title: 'Notes',
+                    passProps: {
+                        notes: jsonRes,
+                        userInfo: this.props.userInfo
+                    }
                 })
             })
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import api from '../Utils/api';
-import Seperator from './helpers/Separator';
+import Separator from './helpers/Separator';
 import Badge from './Badge';
 import {
     View,
@@ -73,10 +73,11 @@ class Notes extends Component {
                             dataSource: this.ds.cloneWithRows(data)
                         })
                     })
-            }).catch(err => {
-            console.log('Request failed', err);
-            this.setState({error});
-        })
+            })
+            .catch(err => {
+                console.log('Request failed', err);
+                this.setState({error});
+            });
     }
     renderRow(rowData) {
         return (
@@ -84,7 +85,7 @@ class Notes extends Component {
                 <View style={styles.rowContainer}>
                     <Text> {rowData} </Text>
                 </View>
-                <Seperator />
+                <Separator />
             </View>
         )
     }
@@ -107,7 +108,7 @@ class Notes extends Component {
             <View style={styles.container}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    render={this.renderRow}
+                    renderRow={this.renderRow}
                     renderHeader={() => <Badge userInfo={this.props.userInfo}/>} />
                 {this.footer()}
             </View>
