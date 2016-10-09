@@ -9,6 +9,7 @@ import {
 import Profile from './Profile';
 import Repositories from './Repositories';
 import api from '../Utils/api';
+import Notes from './Notes';
 
 class Dashboard extends Component {
     makeBackground(btn) {
@@ -51,7 +52,13 @@ class Dashboard extends Component {
 
     }
     goToNotes() {
-        console.log('going to profile page')
+        api.getNotes(this.props.userInfo.login)
+            .then(res => {
+                res = res || {};
+                this.props.navigator.push({
+                    compo
+                })
+            })
     }
     render() {
         return (
