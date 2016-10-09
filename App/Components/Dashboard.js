@@ -6,7 +6,9 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
+import api from '../Utils/api';
 import Profile from './Profile';
+import Repositories from './Repositories';
 
 class Dashboard extends Component {
     makeBackground(btn) {
@@ -35,7 +37,18 @@ class Dashboard extends Component {
         })
     }
     goToRepos() {
-        console.log('going to profile page')
+        api.getRepos(this.props.userInfo.login)
+            .then(res => {
+                this.props.navigator.push({
+                    component: Repositories,
+                    title: 'Repos',
+                    passProps: {
+                        userInfo: this.props.userInfo,
+                        repos: res
+                    }
+                })
+            });
+
     }
     goToNotes() {
         console.log('going to profile page')
